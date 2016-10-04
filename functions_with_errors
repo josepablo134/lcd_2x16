@@ -1,0 +1,16 @@
+lcd_2x16* setLCD4(uint32_t CONTROLPORT_BASE,uint32_t DATAPORT_BASE, uint8_t rs,uint8_t rw,uint8_t enable,uint8_t data){
+	// - - - - - - - -  - - - - - - - -  - - - - - - - -  - - - - - - - - RESERVACION DE MEMORIA DINAMICA
+	lcd_2x16 *temp 			= (lcd_2x16*)	malloc(sizeof(lcd_2x16));
+	temp->DATAPORT_BASE 	= (uint32_t*)	malloc(sizeof(uint32_t));
+	temp->RS 				= (uint8_t*)	malloc(sizeof(uint8_t));
+	temp->RW				= (uint8_t*)	malloc(sizeof(uint8_t));
+	temp->Enable			= (uint8_t*)	malloc(sizeof(uint8_t));
+	temp->DATAMASK			= (uint8_t*)	malloc(sizeof(uint8_t));
+	// - - - - - - - -  - - - - - - - -  - - - - - - - -  - - - - - - - - ASIGNACION DE VALORES
+	temp->DATAPORT_BASE[0]	  = DATAPORT_BASE;
+	temp->RS[0]				  = rs;
+	temp->RW[0]				  = rw;
+	temp->Enable[0]			  = enable;
+	temp->DATAMASK[0]		  = data;
+	return temp;
+}
