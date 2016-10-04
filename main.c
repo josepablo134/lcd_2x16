@@ -57,7 +57,7 @@ int main(){
 		lcd_goto(display,0x07);     //Vamos a la posicion 7
 		lcd_putch(display,(counter/10)+'0');    //Escribimos decenas
 		lcd_putch(display,(counter%10)+'0');    //Escribimos unidades
-		counter++;                              //Auentamos el contador
+		counter++;                              //Aumentamos el contador
         if(counter==100){
 			counter = 0;
 		}
