@@ -17,7 +17,11 @@
  *		CUALESQUIERA, DESTINANDO UN PUERTO AL CONTROL Y OTRO A LOS DATOS.
  *
  *	DESCRIPCION DE USO	:
- *		1. SE CONFIGURA EL RELOJ PARA TRABAJAR A 16 MHZ,
+ *		1. SE CONFIGURAN LAS MACROS DEFINIENDO HZ Y CONFIG CON LOS VALORES DEL 
+ *			TivaWareTM Peripheral Driver Library, FUNCION SysCtlClockFreqSet,
+ * 			PAG 483. POR EJEMPLO, LA CONFIGURACION POR DEFECTO ES:
+ *			HZ		16000000
+ 			CONFIG		SYSCTL_OSC_INT | SYSCTL_USE_PLL | SYSCTL_CFG_VCO_320
  *		2. SE ACTIVA EL PERIFERICO DE LOS PUERTOS A UTILIZAR
  *		3. SE DECLARAN LOS PINES DE CONTROL (LOS CUALES SE CONECTARAN A RS,RW,ENABLE)
  *			COMO SALIDA
@@ -38,8 +42,9 @@
 #include "driverlib/sysctl.h"           //LIBRERIA PARA EL CONTROL DEL SISTEMA (CONFIGURACION DEL RELOJ)
 #include "inc/hw_memmap.h"              //LIBRERIA NECESARIA PARA EL USO DE LAS MACROS (HARDWARE MEMORY MAP)
 #include "driverlib/gpio.h"             //LIBRERIA PARA EL USO DE LAS GPIO
-//- - - - - - - - - - - - - - - - - - - -DEFINICION DE LA FRECUENCIA EN Hrz DEL RELOJ
-#define HZ 					16000000//->16Mhz
+
+//- - - - - - - - - - - - - - - - - - - -DEFINICION DE LA FRECUENCIA EN Hrz DEL RELOJ POR DEFECTO (16MHZ)
+#include "CLOCK_CONFIG.h"
 
 /*
  *  ESTRUCTURA DE DATOS PARA EL LCD A 4 BITS
@@ -53,15 +58,6 @@ typedef struct LCD{
 	volatile uint8_t Enable;
 	volatile uint8_t DATAMASK;
 }lcd_2x16;
-/*
- * FUNCIONES DE CONFIGURACION DEL SISTEMA
- *		- CONFIGURACION DEL RELOJ A 16MHZ	void 		setClockReady
- *		- DELAY A MILISEGUNDOS				void 		delay
- *		- DELAY A MICROSEGUNDOS				void 		delay_us
- * */
-void setClockReady();
-void delay(uint32_t);
-void delay_us(uint32_t);
 
 //-	- - - - - - - -	- - - - - - - -	- - - - - - - -	- - - - - - - -	- - - - - - - -	- - -
 /*
